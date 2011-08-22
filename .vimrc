@@ -26,6 +26,14 @@
   set shiftwidth=2             " auto-indent depth
   set tabstop=4                " real tabs are 4 spaces
 
+"  - auto-completion
+
+  inoremap ( ()<Left>
+  inoremap { {}<Left>
+  inoremap [ []<Left>
+  inoremap ' ''<Left>
+  inoremap " ""<Left>
+
 "  - non-printable characters
 
   set list                     " toggle with :set list!
