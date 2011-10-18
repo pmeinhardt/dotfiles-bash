@@ -1,5 +1,4 @@
-
-" .vimrc - paul meinhardt
+" .vimrc - setting
 
 
 " general
@@ -11,7 +10,7 @@
 " highlighting
 
   set showmatch                " show matching brackets
-  "syntax on                    " syntax highlighting
+ "syntax on                    " syntax highlighting
 
 
 " text formatting
@@ -28,7 +27,7 @@
 
 "  - non-printable characters
 
-  set list                     " toggle with :set list!
+ "set list                     " toggle with :set list!
   set listchars=tab:▸\ ,eol:¬  " chars for invisibles
 
 "  - deleting
@@ -44,6 +43,7 @@
 
 " plugins
 
-  "filetype on                  " enable filetype detection
-  "filetype indent on           " enable filetype-specific indenting
-  "filetype plugin on           " enable filetype-specific plugins
+ "filetype on                  " enable filetype detection
+ "filetype indent on           " enable filetype-specific indenting
+ "filetype plugin on           " enable filetype-specific plugins
+

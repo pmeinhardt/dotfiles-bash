@@ -1,8 +1,2 @@
-
-# .inputrc - paul meinhardt
-
-
-# auto-completion
-
+# path auto-completion
 set completion-ignore-case on
-
