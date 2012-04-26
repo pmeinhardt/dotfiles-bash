@@ -1,2 +1,10 @@
 [user]
-	name = Paul Meinhardt
+        name = Paul Meinhardt
+[alias]
+        co = checkout
+[color]
+        diff = auto
+        status = auto
+        branch = auto
+[github]
+        user = pmeinhardt

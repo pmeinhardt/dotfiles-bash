@@ -1,7 +1,19 @@
-# command aliases
-alias l='ls'
-alias la='ls -a'
-alias ll='ls -al'
+# shortcut to this dotfiles path is $DTS
+export DTS=$HOME/.dotfiles
 
-# git auto-completion
-source ~/.gitcompletion.sh
+# your project folder that we can `c [tab]` to
+# export PROJECTS=~/Development
+
+# source every .bash file in this repo
+for config in $DTS/**/*.bash; do source $config; done
+
+# use .localrc for SUPER SECRET CRAP that you don't
+# want in your public, versioned repo.
+if [ -f ~/.localrc ]; then source ~/.localrc; fi
+
+# # initialize autocomplete here, otherwise functions won't be loaded
+# autoload -U compinit
+# compinit
+
+# load every completion after autocomplete loads
+for config in $DTS/**/completion.sh; do source $config; done
