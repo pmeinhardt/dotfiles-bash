@@ -44,3 +44,15 @@ defaults write com.apple.Finder FXPreferredViewStyle clmv
 
 # Show the ~/Library folder
 chflags nohidden ~/Library
+
+# Enable Safari’s debug menu
+defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
+
+# Add a context menu item for showing the Web Inspector in web views
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+# Enable the debug menu in Address Book
+defaults write com.apple.addressbook ABShowDebugMenu -bool true
+
+# Enable the debug menu in iCal
+defaults write com.apple.iCal IncludeDebugMenu -bool true
