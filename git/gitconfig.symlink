@@ -1,6 +1,7 @@
 [user]
         name = pmeinhardt
 [alias]
+        s = status
         co = checkout
 [color]
         diff = auto
