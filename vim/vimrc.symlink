@@ -53,3 +53,17 @@ set scrolloff=3             " keep at least 3 lines above/below
 filetype on                 " enable filetype detection
 filetype indent on          " enable filetype-specific indenting
 filetype plugin on          " enable filetype-specific plugins
+
+
+" ------------------------------------------------------------------ Remapping
+
+let mapleader = ","         " lead with ,
+
+
+" ------------------------------------------------------------------ Functions
+
+function! StripWhitespace ()
+  exec ':%s/ \+$//gc'
+endfunction
+
+map ,s :call StripWhitespace ()<CR>
