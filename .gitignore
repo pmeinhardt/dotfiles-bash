@@ -1,2 +1,5 @@
 # Ignore Mac OS X hidden files.
 .DS_Store
+
+# Ignore vim history files.
+.netrwhist
