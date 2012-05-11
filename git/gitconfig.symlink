@@ -2,6 +2,7 @@
         name = pmeinhardt
 [alias]
         s = status
+        b = branch
         co = checkout
 [color]
         diff = auto
