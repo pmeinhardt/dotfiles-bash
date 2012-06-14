@@ -1,5 +1,4 @@
 # Clean up unwanted items from Launchpad
-
 if [ ! -e ~/Library/Application\ Support/Dock/*.db ]; then
   exit 0
 fi
