@@ -4,6 +4,8 @@ export HISTSIZE=10000           # expand the history list
 export HISTFILESIZE=10000       # max lines of the history file
 export HISTCONTROL=ignoredups   # don't record dups in history
 
+export CLICOLOR=1               # colorize output
+
 # more...
 
 # shopt -sq cdspell
