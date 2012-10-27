@@ -191,6 +191,7 @@ section "commands" do
   x "kismet"
   x "msfconsole"
   # other
+  x "rbenv"
   x "protoc"
 end
 
