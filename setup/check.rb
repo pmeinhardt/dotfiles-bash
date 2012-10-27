@@ -26,7 +26,8 @@ module Dependencies
     #       File.directory?("/Users/#{name}")
     #     end
     #
-    #     missing do
+    #     missing do |name, *args|
+    #       puts "no user #{name} found"
     #     end
     #
     #     x "hypo"
@@ -48,14 +49,13 @@ module Dependencies
       @@missing = block
     end
 
-    def initialize(title = nil, &block)
+    def initialize(title = nil)
       @title = title
-      @block = block
       @items = []
     end
 
-    def init
-      instance_eval(&@block)
+    def init(&block)
+      instance_eval(&block)
       self
     end
 
@@ -80,7 +80,7 @@ module Dependencies
     end
 
     def run
-      (@header || @@header).call(@title || "")
+      (@header || @@header).call(@title)
       @items.each do |item|
         if @check.call(*item)
           (@found || @@found).call(*item)
@@ -96,14 +96,14 @@ module Dependencies
     # creating structured dependency checklists.
 
     def section(title = nil, &block)
-      section = Section.new(title, &block)
+      section = Section.new(title)
       @sections ||= []
-      @sections << section
+      @sections << [section, block]
       section
     end
 
     def run
-      @sections.each { |s| s.init.run }
+      @sections.each { |(section, block)| section.init(&block).run }
     end
   end
 end
