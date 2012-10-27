@@ -45,6 +45,9 @@ defaults write com.apple.Finder FXPreferredViewStyle clmv
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
+# Enable Safari's develop menu
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+
 # Enable Safari’s debug menu
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
 
