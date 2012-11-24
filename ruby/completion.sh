@@ -69,7 +69,11 @@ _bundle()
     ;;
   *)
     if [ $command = "exec" ]; then
-      COMPREPLY=($(compgen -c -- $cur))
+      if [ $COMP_CWORD -le 2 ]; then
+        COMPREPLY=($(compgen -c -o bashdefault -- $cur))
+      else
+        COMPREPLY=($(compgen -o filenames -- $cur))
+      fi
     fi
     ;;
   esac
