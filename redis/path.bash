@@ -1,1 +1,1 @@
-export PATH=$PATH:/usr/local/redis/bin
+export PATH="$PATH:/usr/local/redis/bin"
