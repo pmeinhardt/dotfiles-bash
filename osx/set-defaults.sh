@@ -21,10 +21,13 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 
 # Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
-defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
+# defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
 
 # Disable press-and-hold for keys in favor of key repeat
-# defaults write -g ApplePressAndHoldEnabled -bool false
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Enable tap to click (Trackpad)
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
 
 # Require password immediately after sleep or screen saver begins
 defaults write com.apple.screensaver askForPassword -int 1
@@ -44,6 +47,9 @@ defaults write com.apple.Finder FXPreferredViewStyle clmv
 
 # Show the ~/Library folder
 chflags nohidden ~/Library
+
+# Make Safari’s search banners default to "contains" instead of "starts with"
+defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
 
 # Enable Safari's develop menu
 defaults write com.apple.Safari IncludeDevelopMenu -bool true
