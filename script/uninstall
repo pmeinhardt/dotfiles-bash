@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# remove symlinked dotfiles (if there are backups)
+
+SRCDIR=$(pwd)
+
+for source in $(find $SRCDIR -maxdepth 2 -name \*.symlink); do
+  name=$(basename "${source%.*}")
+  dest="$HOME/.$name"
+  backup="$dest.backup"
+
+  if [ -e "$backup" ]; then
+    rm -f $dest
+    mv $backup $dest
+    echo "Restored $dest"
+  fi
+done
+
+# to remove homebrew and anything installed through brew,
+# see http://git.io/8tnVuw

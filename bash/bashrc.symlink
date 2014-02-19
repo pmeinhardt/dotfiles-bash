@@ -2,18 +2,31 @@
 export DTS=$HOME/.dotfiles
 
 # your project folder that we can `c [tab]` to
-# export PROJECTS=~/Development
-
-# source every .bash file in this repo
-for config in $DTS/**/*.bash; do source $config; done
+# export PROJECTS=~/Code
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
 if [ -f ~/.localrc ]; then source ~/.localrc; fi
+
+# find every .bash file in this repo
+files=($DTS/**/*.bash)
+
+# source all path files
+for config in ${files[@]}; do
+  [ ${config##*\/} != "path.bash" ] || source $config
+done
+
+# source bash files except for path and completion files
+for config in ${files[@]}; do
+  name=${config##*\/}
+  [ $name != "path.bash" ] && [ $name != "completion.bash" ] && source $config
+done
 
 # # initialize autocomplete here, otherwise functions won't be loaded
 # autoload -U compinit
 # compinit
 
 # load every completion after autocomplete loads
-for config in $DTS/**/completion.sh; do source $config; done
+for config in ${files[@]}; do
+  [ ${config##*\/} != "completion.bash" ] || source $config
+done

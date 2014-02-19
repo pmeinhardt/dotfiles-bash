@@ -1,0 +1,155 @@
+#!/usr/bin/env bash
+
+# bootstrap the system, installing dotfiles and basic dependencies
+
+SRCDIR=$(pwd)
+
+set -e
+
+function info {
+  printf "$1\n"
+}
+
+function prompt {
+  printf "$1 "
+}
+
+function success {
+  printf "\033[00;32m$1\033[0m\n"
+}
+
+function fail {
+  printf "\033[0;31m$1\033[0m\n"
+  exit 1
+}
+
+function remove {
+  rm -rf $2
+  info "  Removed $2"
+}
+
+function backup {
+  mv $2 $2\.backup
+  info "  Moved $2 to $2.backup"
+}
+
+function skip {
+  info "  Skipped $2"
+}
+
+function link {
+  ln -s $1 $2
+  info "  Linked $1 to $2"
+}
+
+function defaults {
+  sh -c $SRCDIR/osx/set-defaults.sh
+}
+
+function dotfiles {
+  info "Installing dotfiles..."
+
+  all=false
+
+  for source in $(find $SRCDIR -maxdepth 2 -name \*.symlink); do
+    name=$(basename "${source%.*}")
+    dest="$HOME/.$name"
+
+    if [ -f $dest ] || [ -d $dest ]; then
+      overwrite=false
+      backup=false
+      skip=false
+
+      if [ "$all" != "overwrite" ] && \
+         [ "$all" != "backup" ] &&  \
+         [ "$all" != "skip" ]; then
+         proceed=false
+
+         while [ "$proceed" == "false" ]; do
+           prompt "File already exists: .$name [o,O,b,B,s,S,d,q,?]"
+           read -n 1 action
+           printf "\n"
+
+           diff=false
+           explain=false
+           proceed=true
+
+           case "$action" in
+             o)
+               overwrite=true;;
+             O)
+               all="overwrite";;
+             b)
+               backup=true;;
+             B)
+               all="backup";;
+             s)
+               skip=true;;
+             S)
+               all="skip";;
+             d)
+               diff=true;;
+             q)
+               exit;;
+             ?)
+               explain=true;;
+             *)
+               proceed=false;;
+           esac
+
+           if [ "$diff" == "true" ]; then
+             diff -u $dest $source || true
+             proceed=false
+           fi
+
+           if [ "$explain" == "true" ]; then
+             info "o - overwrite"
+             info "O - overwrite all"
+             info "b - create a backup for this file"
+             info "B - backup all files"
+             info "s - skip this file"
+             info "S - skip all files"
+             info "d - show diff"
+             info "q - exit"
+             info "? - print help"
+             proceed=false
+           fi
+         done
+       fi
+
+      if [ "$overwrite" == "true" ] || [ "$all" == "overwrite" ]; then
+        remove $source $dest
+      fi
+
+      if [ "$backup" == "true" ] || [ "$all" == "backup" ]; then
+        backup $source $dest
+      fi
+
+      if [ "$skip" == "false" ] && [ "$all" != "skip" ]; then
+        link $source $dest
+      else
+        skip $source $dest
+      fi
+    else
+      link $source $dest
+    fi
+  done
+
+  success "Installed dotfiles"
+}
+
+function homebrew {
+  if [ "$(uname -s)" == "Darwin" ] && [ ! $(which brew) ]; then
+    info "Installing homebrew..."
+    sh -c $SRCDIR/homebrew/install.sh
+    if test $(which brew); then
+      success "Installed homebrew"
+    else
+      fail "Error installing homebrew"
+    fi
+  fi
+}
+
+defaults
+dotfiles
+homebrew
