@@ -1,3 +1,20 @@
+# This function expands tildes in pathnames
+#
+_expand()
+{
+    [ "$cur" != "${cur%\\}" ] && cur="$cur\\"
+
+    # expand ~username type directory specifications
+    if [[ "$cur" == \~*/* ]]; then
+        eval cur=$cur
+        
+    elif [[ "$cur" == \~* ]]; then
+        cur=${cur#\~}
+        COMPREPLY=( $( compgen -P '~' -u $cur ) )
+        return ${#COMPREPLY[@]}
+    fi
+}
+
 # Get the word to complete
 # This is nicer than ${COMP_WORDS[$COMP_CWORD]}, since it handles cases
 # where the user is completing in the middle of a word.
@@ -34,3 +51,29 @@ _get_cword()
     cur=${cur:$word_start}
     echo $cur
 } # _get_cword()
+
+# This function performs file and directory completion. It's better than
+# simply using 'compgen -f', because it honours spaces in filenames.
+# If passed -d, it completes only on directories. If passed anything else,
+# it's assumed to be a file glob to complete on.
+#
+_filedir()
+{
+	local IFS=$'\t\n' xspec #glob
+
+	_expand || return 0
+
+	#glob=$(set +o|grep noglob) # save glob setting.
+	#set -f		 # disable pathname expansion (globbing)
+
+	if [ "${1:-}" = -d ]; then
+		COMPREPLY=( ${COMPREPLY[@]:-} $( compgen -d -- $cur ) )
+		#eval "$glob"    # restore glob setting.
+		return 0
+	fi
+
+	xspec=${1:+"!*.$1"}	# set only if glob passed in as $1
+	COMPREPLY=( ${COMPREPLY[@]:-} $( compgen -f -X "$xspec" -- "$cur" ) \
+		    $( compgen -d -- "$cur" ) )
+	#eval "$glob"    # restore glob setting.
+} # _filedir()
