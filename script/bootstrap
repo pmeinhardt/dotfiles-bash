@@ -24,17 +24,17 @@ function fail {
 }
 
 function remove {
-  rm -rf $2
-  info "  Removed $2"
+  rm -rf $1
+  info "  Removed $1"
 }
 
 function backup {
-  mv $2 $2\.backup
-  info "  Moved $2 to $2.backup"
+  mv $1 $1\.backup
+  info "  Moved $1 to $1.backup"
 }
 
 function skip {
-  info "  Skipped $2"
+  info "  Skipped $1"
 }
 
 function link {
@@ -118,17 +118,17 @@ function dotfiles {
        fi
 
       if [ "$overwrite" == "true" ] || [ "$all" == "overwrite" ]; then
-        remove $source $dest
+        remove $dest
       fi
 
       if [ "$backup" == "true" ] || [ "$all" == "backup" ]; then
-        backup $source $dest
+        backup $dest
       fi
 
-      if [ "$skip" == "false" ] && [ "$all" != "skip" ]; then
-        link $source $dest
+      if [ "$skip" == "true" ] || [ "$all" == "skip" ]; then
+        skip $dest
       else
-        skip $source $dest
+        link $source $dest
       fi
     else
       link $source $dest

@@ -12,14 +12,16 @@ if [ -f ~/.localrc ]; then source ~/.localrc; fi
 files=($DTS/**/*.bash)
 
 # source all path files
-for config in ${files[@]}; do
-  [ ${config##*\/} != "path.bash" ] || source $config
+for f in ${files[@]}; do
+  [ ${f##*\/} != "path.bash" ] || source $f
 done
 
 # source bash files except for path and completion files
-for config in ${files[@]}; do
-  name=${config##*\/}
-  [ $name != "path.bash" ] && [ $name != "completion.bash" ] && source $config
+for f in ${files[@]}; do
+  fname=${f##*\/}
+  [ $fname != "path.bash" ] && \
+  [ $fname != "completion.bash" ] && \
+  source $f
 done
 
 # # initialize autocomplete here, otherwise functions won't be loaded
@@ -27,6 +29,6 @@ done
 # compinit
 
 # load every completion after autocomplete loads
-for config in ${files[@]}; do
-  [ ${config##*\/} != "completion.bash" ] || source $config
+for f in ${files[@]}; do
+  [ ${f##*\/} != "completion.bash" ] || source $f
 done
