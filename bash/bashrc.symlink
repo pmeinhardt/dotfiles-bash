@@ -24,10 +24,6 @@ for f in ${files[@]}; do
   source $f
 done
 
-# # initialize autocomplete here, otherwise functions won't be loaded
-# autoload -U compinit
-# compinit
-
 # load every completion after autocomplete loads
 for f in ${files[@]}; do
   [ ${f##*\/} != "completion.bash" ] || source $f
