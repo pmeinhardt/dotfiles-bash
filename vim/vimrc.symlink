@@ -67,3 +67,8 @@ map ,s :%s/ \+$//gc<CR>
 
 " toggle list option
 map ,l :set list!<CR>
+
+" ----------------------------------------------------------------------------
+
+" use pathogen to load vim bundles
+execute pathogen#infect()
