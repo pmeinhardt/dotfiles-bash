@@ -24,7 +24,7 @@ for f in ${files[@]}; do
   source $f
 done
 
-# load every completion after autocomplete loads
+# load every completion file
 for f in ${files[@]}; do
   [ ${f##*\/} != "completion.bash" ] || source $f
 done
