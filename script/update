@@ -2,6 +2,8 @@
 
 # update dotfiles cautiously (without symlinking)
 
+cd "$(dirname $0)/.."
+
 echo "Updating dotfiles..."
 git pull
 
