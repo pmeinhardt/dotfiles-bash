@@ -2,8 +2,10 @@
 
 # update dotfiles cautiously (without symlinking)
 
+echo "Updating dotfiles..."
 git pull
 
 # update homebrew
 
+echo "Updating homebrew..."
 brew update
