@@ -1,12 +1,15 @@
-# set history options
+# set shell history variables
 
 export HISTSIZE=10000           # expand the history list
 export HISTFILESIZE=10000       # max lines of the history file
 export HISTCONTROL=ignoredups   # don't record dups in history
 
-export CLICOLOR=1               # colorize output
+# colorize output
 
-# more...
+export CLICOLOR=1
+export GREP_OPTIONS="--color=auto"
+
+# more settings... (run `shopt` to see available options)
 
 # shopt -sq cdspell
 shopt -sq histappend
