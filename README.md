@@ -67,6 +67,14 @@ getting started using [homebrew](https://github.com/Homebrew/homebrew),
 
 ## thanks
 
-I started off by boldly adapting from [Zach Holman](https://github.com/holman)'s neat [dotfiles](https://github.com/holman/dotfiles), trimming down on parts and pulling in pieces from [Mathias Bynens](https://github.com/mathiasbynens/dotfiles), [Gary Bernhardt](https://github.com/garybernhardt/dotfiles/), [Gianni Chiappetta](https://github.com/gf3/dotfiles), [Jan Moesen](https://github.com/janmoesen/tilde), and many others.
+I started off by boldly adapting from [Zach Holman](https://github.com/holman)'s
+neat [dotfiles](https://github.com/holman/dotfiles), trimming down on parts and
+pulling in pieces from
+[Mathias Bynens](https://github.com/mathiasbynens/dotfiles),
+[Gary Bernhardt](https://github.com/garybernhardt/dotfiles),
+[Gianni Chiappetta](https://github.com/gf3/dotfiles),
+[Jan Moesen](https://github.com/janmoesen/tilde), and many others.
 
-Also thanks to [Tim Pope](https://github.com/tpope/) for his excellent vim plugins.
+Also thanks to [Tim Pope](https://github.com/tpope/) for his excellent vim
+plugins and [Chris Kempson](https://github.com/chriskempson) for his
+[Base16 color scheme builder](https://github.com/chriskempson/base16-builder).
