@@ -21,7 +21,11 @@ function switch-gcc {
 
   if [ $(which gcc) != "${gnubin}/gcc" ]; then
     export PATH=$gnubin:$PATH
+    export CXX=$gnubin/g++
+    export CC=$gnubin/gcc
   else
     export PATH=${PATH//$gnubin\:/}
+    unset CXX
+    unset CC
   fi
 }
