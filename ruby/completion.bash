@@ -4,8 +4,13 @@ _bundle()
 {
   local cur prev command
 
-  cur="${COMP_WORDS[COMP_CWORD]}"
-  prev="${COMP_WORDS[COMP_CWORD-1]}"
+  if test $(type -t _get_comp_words_by_ref) = "function"; then
+    _get_comp_words_by_ref cur prev # bash-completion installed
+  else
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+  fi
+
   COMPREPLY=()
 
   OPTIONS="--no-color --verbose"
