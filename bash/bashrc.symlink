@@ -24,6 +24,12 @@ for f in ${files[@]}; do
   source $f
 done
 
+# source bash-completion
+f=$(brew --prefix)/etc/bash_completion
+if test -e $f; then
+  source $f
+fi
+
 # load every completion file
 for f in ${files[@]}; do
   [ ${f##*\/} != "completion.bash" ] || source $f
